@@ -24,9 +24,9 @@ public class Main
             line = brds.readLine();
             if (line == null)
                 break;
+            line = line.replaceAll("\\\\n", "\n");
             String[] dataArray = line.split(",");
-            //System.out.println(dataArray[2]);
-            //System.out.println("301 Cobblestone Way\nBedrock");
+            // System.out.println(dataArray[2]);
             // System.out.println(line);
             FileReader tf = new FileReader(templateFile);
             BufferedReader brtf = new BufferedReader(tf);
@@ -35,7 +35,7 @@ public class Main
                 String templateFileLine = brtf.readLine();
                 if (templateFileLine == null)
                     break;
-                //System.out.println(templateFileLine);
+                // System.out.println(templateFileLine);
                 String[] tempArray = templateFileLine.split(" ");
                 templateFileLine = "";
 
@@ -88,8 +88,9 @@ public class Main
                 for (int k = 0; k < tempArray.length; k++) {
                     templateFileLine += tempArray[k] + " ";
                 }
-            
+                
                 System.out.println(templateFileLine);
+                
             }
 
             System.out.println();

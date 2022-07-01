@@ -36,30 +36,35 @@ public class Client {
         ObjectOutputStream oos = new ObjectOutputStream(os);
         ObjectInputStream ois = new ObjectInputStream(is);
     
+        // read inital request from server
         request = ois.readUTF();
-        System.out.println(request);
 
+        // calculate the average
         Calculate calculate = new Calculate(request);
         result = calculate.average();
-        System.out.println("The avg is: " + result);
 
-        System.out.println("This is the request id: " + calculate.getRequestID());
-
+        // send answer and submitter details to server
         oos.writeUTF(calculate.getRequestID());
         oos.writeUTF(name);
         oos.writeUTF(email);
         oos.writeFloat(result);
         oos.flush();
 
+        // checks boolean reply from server
         if (readBoolean(ois.readBoolean())) {
             System.out.println("SUCCESS");
             os.close();
             is.close();
+            oos.close();
+            ois.close();
         } 
         else 
         {
             System.out.println("FAILED");
             System.out.println(ois.readUTF());
+            os.close();
+            is.close();
+            oos.close();
             ois.close();
         }
     }
